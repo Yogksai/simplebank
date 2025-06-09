@@ -6,11 +6,8 @@ import (
 	"os"
 	"testing"
 
+	"github.com/Yogksai/simplebank/util"
 	"github.com/jackc/pgx/v5/pgxpool"
-)
-
-const (
-	dbSource = "postgresql://kadera:secret@localhost:5432/simple_bank?sslmode=disable"
 )
 
 var testQueries *Queries
@@ -19,10 +16,13 @@ var testQueries *Queries
 var testPool *pgxpool.Pool
 
 func TestMain(m *testing.M) {
-	var err error
+	config, err := util.LoadConfig("../..")
+	if err != nil {
+		log.Fatal("cannot load config: " + err.Error())
+	}
 	ctx := context.Background()
 
-	testPool, err = pgxpool.New(ctx, dbSource)
+	testPool, err = pgxpool.New(ctx, config.DBSource)
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
