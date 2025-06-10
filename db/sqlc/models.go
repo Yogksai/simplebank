@@ -9,24 +9,33 @@ import (
 )
 
 type Account struct {
-	ID        int64            `json:"id"`
-	Owner     string           `json:"owner"`
-	Balance   int64            `json:"balance"`
-	Currency  string           `json:"currency"`
-	CreatedAt pgtype.Timestamp `json:"created_at"`
+	ID        int64              `json:"id"`
+	Owner     string             `json:"owner"`
+	Balance   int64              `json:"balance"`
+	Currency  string             `json:"currency"`
+	CreatedAt pgtype.Timestamptz `json:"created_at"`
 }
 
 type Entry struct {
-	ID        int64            `json:"id"`
-	AccountID int64            `json:"account_id"`
-	Amount    int64            `json:"amount"`
-	CreatedAt pgtype.Timestamp `json:"created_at"`
+	ID        int64              `json:"id"`
+	AccountID int64              `json:"account_id"`
+	Amount    int64              `json:"amount"`
+	CreatedAt pgtype.Timestamptz `json:"created_at"`
 }
 
 type Transfer struct {
-	ID            int64            `json:"id"`
-	FromAccountID int64            `json:"from_account_id"`
-	ToAccountID   int64            `json:"to_account_id"`
-	Amount        int64            `json:"amount"`
-	CreatedAt     pgtype.Timestamp `json:"created_at"`
+	ID            int64              `json:"id"`
+	FromAccountID int64              `json:"from_account_id"`
+	ToAccountID   int64              `json:"to_account_id"`
+	Amount        int64              `json:"amount"`
+	CreatedAt     pgtype.Timestamptz `json:"created_at"`
+}
+
+type User struct {
+	Username          string             `json:"username"`
+	PasswordHash      string             `json:"password_hash"`
+	FullName          string             `json:"full_name"`
+	Email             string             `json:"email"`
+	PasswordChangedAt pgtype.Timestamptz `json:"password_changed_at"`
+	CreatedAt         pgtype.Timestamp   `json:"created_at"`
 }

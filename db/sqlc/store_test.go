@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -13,7 +12,6 @@ func TestTranferTx(t *testing.T) {
 
 	account1 := CreateRandomAccount(t)
 	account2 := CreateRandomAccount(t)
-	fmt.Println(">>before:", account1.Balance, account2.Balance)
 
 	amount := int64(10)
 	n := 4
@@ -80,7 +78,6 @@ func TestTranferTx(t *testing.T) {
 		require.NotEmpty(t, toAccount, "To account should not be empty")
 		require.Equal(t, account2.ID, toAccount.ID, "To account ID should match")
 		//check balances
-		fmt.Println(">>tx:", fromAccount.Balance, toAccount.Balance)
 		diff1 := account1.Balance - fromAccount.Balance
 		diff2 := toAccount.Balance - account2.Balance
 		require.Equal(t, diff1, diff2)
@@ -96,7 +93,6 @@ func TestTranferTx(t *testing.T) {
 	expectedFromBalance := account1.Balance - int64(n)*amount
 	expectedToBalance := account2.Balance + int64(n)*amount
 
-	fmt.Println(">>after:", updatedAccount1.Balance, updatedAccount2.Balance)
 	require.Equal(t, expectedFromBalance, updatedAccount1.Balance)
 	require.Equal(t, expectedToBalance, updatedAccount2.Balance)
 }
@@ -106,7 +102,6 @@ func TestTransferTxDeadlock(t *testing.T) {
 
 	account1 := CreateRandomAccount(t)
 	account2 := CreateRandomAccount(t)
-	fmt.Println(">>before:", account1.Balance, account2.Balance)
 
 	amount := int64(10)
 	n := 10
@@ -143,7 +138,6 @@ func TestTransferTxDeadlock(t *testing.T) {
 	updatedAccount2, err := testQueries.GetAccount(context.Background(), account2.ID)
 	require.NoError(t, err)
 
-	fmt.Println(">>after:", updatedAccount1.Balance, updatedAccount2.Balance)
 	require.Equal(t, account1.Balance, updatedAccount1.Balance)
 	require.Equal(t, account2.Balance, updatedAccount2.Balance)
 }

@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"strings"
 
 	db "github.com/Yogksai/simplebank/db/sqlc"
 	"github.com/gin-gonic/gin"
@@ -27,7 +28,19 @@ func (server *Server) createAccount(ctx *gin.Context) {
 	}
 	account, err := server.store.CreateAccount(ctx, arg)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, err.Error())
+		if strings.Contains(err.Error(), "duplicate key value violates unique constraint") {
+			ctx.JSON(http.StatusForbidden, gin.H{
+				"error": "account already exists",
+			})
+			return
+		} else if strings.Contains(err.Error(), "violates foreign key constraint") {
+			ctx.JSON(http.StatusForbidden, gin.H{
+				"error": "no accounts with the given owner",
+			})
+			return
+		}
+
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	ctx.JSON(http.StatusOK, account)

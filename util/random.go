@@ -27,6 +27,9 @@ func RandomOwner() string {
 func RandomBalance() int64 {
 	return Randomint(0, 1000000)
 }
+func RandomEmail() string {
+	return RandomString(6) + "@email.com"
+}
 func RandomCurrency() string {
 	currencies := []string{"TNG", "RUB", "SOM"}
 	return currencies[rand.Intn(len(currencies))]
