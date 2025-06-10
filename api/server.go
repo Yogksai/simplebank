@@ -7,20 +7,21 @@ import (
 
 // server serves HTTP requests for banking service
 type Server struct {
-	store  *db.Store
+	store  db.Store
 	router *gin.Engine
 }
 
 // Constructor function to create a new server
-func NewServer(store *db.Store) *Server {
+func NewServer(store db.Store) *Server {
 	server := &Server{
 		store: store,
 	}
 	router := gin.Default()
-	router.POST("/account", server.createAccount)
+	router.POST("/accounts", server.createAccount)
 	router.GET("/accounts/:id", server.getAccount)
 	router.GET("/accounts", server.listAccounts)
 
+	router.POST("/transfers", server.createTransfer)
 	server.router = router
 	return server
 }

@@ -5,6 +5,7 @@ import (
 
 	db "github.com/Yogksai/simplebank/db/sqlc"
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5"
 )
 
 type CreateAccountRequest struct {
@@ -38,12 +39,16 @@ type GetAccountRequest struct {
 
 func (server *Server) getAccount(ctx *gin.Context) {
 	var req GetAccountRequest
-	if err := ctx.ShouldBindJSON(&req); err != nil {
+	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
 	account, err := server.store.GetAccount(ctx, req.ID)
 	if err != nil {
+		if err == pgx.ErrNoRows {
+			ctx.JSON(http.StatusNotFound, gin.H{"error": "account not found"})
+			return
+		}
 		ctx.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
