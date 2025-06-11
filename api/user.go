@@ -68,3 +68,48 @@ func (server *Server) createUser(ctx *gin.Context) {
 
 	ctx.JSON(200, rsp)
 }
+
+type LoginUserRequest struct {
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required,min=6"`
+}
+type LoginUserResponse struct {
+	AccessToken string       `json:"access_token"`
+	User        UserResponse `json:"username"`
+}
+
+func (server *Server) loginUser(ctx *gin.Context) {
+	var req LoginUserRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	user, err := server.store.GetUser(ctx, req.Username)
+	if err != nil {
+		if strings.Contains(err.Error(), "no rows in result set") {
+			ctx.JSON(http.StatusNotFound, gin.H{"error": "invalid username"})
+			return
+		}
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	if err := util.CheckPasswordHash(req.Password, user.PasswordHash); err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "invalid password"})
+		return
+	}
+	accessToken, err := server.tokenMaker.CreateToken(user.Username, server.config.AccessTokenDuration)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create access token"})
+		return
+	}
+	ctx.JSON(200, LoginUserResponse{
+		AccessToken: accessToken,
+		User: UserResponse{
+			Username:          user.Username,
+			FullName:          user.FullName,
+			Email:             user.Email,
+			PasswordChangedAt: user.PasswordChangedAt,
+			CreatedAt:         user.CreatedAt,
+		},
+	})
+}

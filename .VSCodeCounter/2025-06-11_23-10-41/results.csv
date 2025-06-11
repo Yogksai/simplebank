@@ -1,0 +1,47 @@
+"filename", "language", "Go", "MS SQL", "YAML", "Go Checksum File", "Makefile", "Go Module File", "comment", "blank", "total"
+"/Users/kadera/all/simplebank/.github/workflows/ci.yml", "YAML", 0, 0, 41, 0, 0, 0, 0, 9, 50
+"/Users/kadera/all/simplebank/Makefile", "Makefile", 0, 0, 0, 0, 24, 0, 0, 0, 24
+"/Users/kadera/all/simplebank/api/account.go", "Go", 82, 0, 0, 0, 0, 0, 0, 12, 94
+"/Users/kadera/all/simplebank/api/account_test.go", "Go", 143, 0, 0, 0, 0, 0, 1, 16, 160
+"/Users/kadera/all/simplebank/api/main_test.go", "Go", 24, 0, 0, 0, 0, 0, 0, 5, 29
+"/Users/kadera/all/simplebank/api/server.go", "Go", 40, 0, 0, 0, 0, 0, 2, 8, 50
+"/Users/kadera/all/simplebank/api/transfer.go", "Go", 55, 0, 0, 0, 0, 0, 0, 8, 63
+"/Users/kadera/all/simplebank/api/user.go", "Go", 102, 0, 0, 0, 0, 0, 0, 14, 116
+"/Users/kadera/all/simplebank/db/migration/000001_init_schema.down.sql", "MS SQL", 0, 3, 0, 0, 0, 0, 0, 0, 3
+"/Users/kadera/all/simplebank/db/migration/000001_init_schema.up.sql", "MS SQL", 0, 28, 0, 0, 0, 0, 0, 13, 41
+"/Users/kadera/all/simplebank/db/migration/000002_add_users.down.sql", "MS SQL", 0, 3, 0, 0, 0, 0, 0, 0, 3
+"/Users/kadera/all/simplebank/db/migration/000002_add_users.up.sql", "MS SQL", 0, 10, 0, 0, 0, 0, 1, 2, 13
+"/Users/kadera/all/simplebank/db/mock/store.go", "Go", 239, 0, 0, 0, 0, 0, 47, 48, 334
+"/Users/kadera/all/simplebank/db/query/account.sql", "MS SQL", 0, 24, 0, 0, 0, 0, 7, 8, 39
+"/Users/kadera/all/simplebank/db/query/entry.sql", "MS SQL", 0, 18, 0, 0, 0, 0, 5, 5, 28
+"/Users/kadera/all/simplebank/db/query/transfer.sql", "MS SQL", 0, 18, 0, 0, 0, 0, 5, 5, 28
+"/Users/kadera/all/simplebank/db/query/user.sql", "MS SQL", 0, 8, 0, 0, 0, 0, 2, 1, 11
+"/Users/kadera/all/simplebank/db/sqlc/account.sql.go", "Go", 148, 0, 0, 0, 0, 0, 4, 21, 173
+"/Users/kadera/all/simplebank/db/sqlc/account_test.go", "Go", 75, 0, 0, 0, 0, 0, 0, 18, 93
+"/Users/kadera/all/simplebank/db/sqlc/db.go", "Go", 22, 0, 0, 0, 0, 0, 3, 8, 33
+"/Users/kadera/all/simplebank/db/sqlc/entry.sql.go", "Go", 105, 0, 0, 0, 0, 0, 4, 16, 125
+"/Users/kadera/all/simplebank/db/sqlc/entry_test.go", "Go", 70, 0, 0, 0, 0, 0, 2, 16, 88
+"/Users/kadera/all/simplebank/db/sqlc/main_test.go", "Go", 24, 0, 0, 0, 0, 0, 1, 7, 32
+"/Users/kadera/all/simplebank/db/sqlc/models.go", "Go", 32, 0, 0, 0, 0, 0, 3, 7, 42
+"/Users/kadera/all/simplebank/db/sqlc/querier.go", "Go", 26, 0, 0, 0, 0, 0, 3, 5, 34
+"/Users/kadera/all/simplebank/db/sqlc/store.go", "Go", 108, 0, 0, 0, 0, 0, 0, 18, 126
+"/Users/kadera/all/simplebank/db/sqlc/store_test.go", "Go", 112, 0, 0, 0, 0, 0, 6, 26, 144
+"/Users/kadera/all/simplebank/db/sqlc/transfer.sql.go", "Go", 110, 0, 0, 0, 0, 0, 4, 16, 130
+"/Users/kadera/all/simplebank/db/sqlc/transger_test.go", "Go", 65, 0, 0, 0, 0, 0, 0, 12, 77
+"/Users/kadera/all/simplebank/db/sqlc/user.sql.go", "Go", 53, 0, 0, 0, 0, 0, 4, 8, 65
+"/Users/kadera/all/simplebank/db/sqlc/user_test.go", "Go", 43, 0, 0, 0, 0, 0, 0, 12, 55
+"/Users/kadera/all/simplebank/go.mod", "Go Module File", 0, 0, 0, 0, 0, 65, 0, 4, 69
+"/Users/kadera/all/simplebank/go.sum", "Go Checksum File", 0, 0, 0, 176, 0, 0, 0, 1, 177
+"/Users/kadera/all/simplebank/main.go", "Go", 30, 0, 0, 0, 0, 0, 0, 5, 35
+"/Users/kadera/all/simplebank/sqlc.yaml", "YAML", 0, 0, 20, 0, 0, 0, 0, 3, 23
+"/Users/kadera/all/simplebank/token/jwt_maker.go", "Go", 72, 0, 0, 0, 0, 0, 1, 6, 79
+"/Users/kadera/all/simplebank/token/jwt_maker_test.go", "Go", 38, 0, 0, 0, 0, 0, 3, 12, 53
+"/Users/kadera/all/simplebank/token/maker.go", "Go", 6, 0, 0, 0, 0, 0, 4, 3, 13
+"/Users/kadera/all/simplebank/token/paseto_maker.go", "Go", 36, 0, 0, 0, 0, 0, 1, 7, 44
+"/Users/kadera/all/simplebank/token/paseto_maker_test.go", "Go", 25, 0, 0, 0, 0, 0, 0, 7, 32
+"/Users/kadera/all/simplebank/token/payload.go", "Go", 38, 0, 0, 0, 0, 0, 0, 7, 45
+"/Users/kadera/all/simplebank/util/config.go", "Go", 25, 0, 0, 0, 0, 0, 0, 7, 32
+"/Users/kadera/all/simplebank/util/password.go", "Go", 19, 0, 0, 0, 0, 0, 1, 5, 25
+"/Users/kadera/all/simplebank/util/password_test.go", "Go", 18, 0, 0, 0, 0, 0, 0, 5, 23
+"/Users/kadera/all/simplebank/util/random.go", "Go", 32, 0, 0, 0, 0, 0, 0, 5, 37
+"Total", "-", 2017, 112, 61, 176, 24, 65, 114, 421, 2990

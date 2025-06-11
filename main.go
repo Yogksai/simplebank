@@ -22,9 +22,13 @@ func main() {
 	}
 	defer conn.Close()
 	store := db.NewStore(conn)
-	server := api.NewServer(store)
-	if err := server.Start(config.ServerAddress); err != nil {
-		panic("cannot start server: " + err.Error())
+	server, err := api.NewServer(store, config)
+	if err != nil {
+		log.Fatal("cannot create server: " + err.Error())
+	}
+	err = server.Start(config.ServerAddress)
+	if err != nil {
+		log.Fatal("cannot start server: " + err.Error())
 	}
 
 }

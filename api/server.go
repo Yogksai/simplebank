@@ -1,22 +1,35 @@
 package api
 
 import (
+	"fmt"
+
 	db "github.com/Yogksai/simplebank/db/sqlc"
+	token "github.com/Yogksai/simplebank/token"
+	"github.com/Yogksai/simplebank/util"
 	"github.com/gin-gonic/gin"
 )
 
 // server serves HTTP requests for banking service
 type Server struct {
-	store  db.Store
-	router *gin.Engine
+	store      db.Store
+	router     *gin.Engine
+	tokenMaker token.Maker //interface
+	config     util.Config
 }
 
 // Constructor function to create a new server
-func NewServer(store db.Store) *Server {
+func NewServer(store db.Store, config util.Config) (*Server, error) {
+	tokenMaker, err := token.NewPasetoMaker(config.TokenKey)
+	if err != nil {
+		return nil, fmt.Errorf("cannot create token maker: %w", err)
+	}
 	server := &Server{
-		store: store,
+		config:     config,
+		store:      store,
+		tokenMaker: tokenMaker,
 	}
 	router := gin.Default()
+	router.POST("/users/login", server.loginUser)
 	router.POST("/users", server.createUser)
 	router.POST("/accounts", server.createAccount)
 	router.GET("/accounts/:id", server.getAccount)
@@ -24,7 +37,7 @@ func NewServer(store db.Store) *Server {
 
 	router.POST("/transfers", server.createTransfer)
 	server.router = router
-	return server
+	return server, nil
 }
 
 func (server *Server) Start(address string) error {
