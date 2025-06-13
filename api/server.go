@@ -28,16 +28,22 @@ func NewServer(store db.Store, config util.Config) (*Server, error) {
 		store:      store,
 		tokenMaker: tokenMaker,
 	}
+	server.InitRoutes()
+	return server, nil
+}
+
+func (server *Server) InitRoutes() {
 	router := gin.Default()
 	router.POST("/users/login", server.loginUser)
 	router.POST("/users", server.createUser)
-	router.POST("/accounts", server.createAccount)
-	router.GET("/accounts/:id", server.getAccount)
-	router.GET("/accounts", server.listAccounts)
 
-	router.POST("/transfers", server.createTransfer)
+	authRouter := router.Group("/").Use(authMiddleware(server.tokenMaker))
+	authRouter.POST("/accounts", server.createAccount)
+	authRouter.GET("/accounts/:id", server.getAccount)
+	authRouter.GET("/accounts", server.listAccounts)
+
+	authRouter.POST("/transfers", server.createTransfer)
 	server.router = router
-	return server, nil
 }
 
 func (server *Server) Start(address string) error {
