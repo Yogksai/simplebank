@@ -1,5 +1,5 @@
 postgres:
-	docker run --name mydb -p 5432:5432 -e POSTGRES_USER=kadera -e POSTGRES_PASSWORD=secret -d postgres
+	docker run --name mydb --network bank-network -p 5432:5432  -e POSTGRES_USER=kadera -e POSTGRES_PASSWORD=secret -d postgres
 createdb:
 	docker exec -it mydb createdb --username=kadera --owner=kadera simple_bank
 dropdb:
