@@ -1,4 +1,4 @@
-#Build stage
+#Build stag:
 
 FROM golang:1.23.10-alpine3.21 AS builder
 #Установление рабочей директорий в контейнере
